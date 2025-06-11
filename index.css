@@ -19,8 +19,12 @@ body {
   text-align: center; /* 이전 브라우저 및 인라인 요소 중앙 정렬을 위한 대체 */
 }
 .image-container img {
-  width: 120px;
-  height: 120px;
+  width: 120px !important;
+  height: 120px !important;
+  min-width: 120px !important;
+  min-height: 120px !important;
+  max-width: 120px !important;
+  max-height: 120px !important;
   display: block;
   border-radius: 16px;
 }
