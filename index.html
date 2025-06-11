@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Character</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="content-wrapper">
+  <div class="main-content">
+    <div class="image-container">
+      <img src="images/mycharacter.png" alt="My Character">
+    </div>
+    <div class="caption">오늘 뭐 해 먹을까?</div>
+  </div>
+
+  <div class="output-field"></div>
+
+  <div class="input-container">
+    <input type="text" class="input-field" placeholder="냉장고 안 재료 목록 입력">
+    <img src="images/EnterButton.png" alt="Enter Button" class="enter-button">
+  </div>
+
+  <div class="copyright">ⓒ 2025. Daehyun Lee All Rights Reserved.</div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputField = document.querySelector('.input-field');
+    const enterButton = document.querySelector('.enter-button');
+    const outputField = document.querySelector('.output-field');
+
+    function processInput() {
+      const inputValue = inputField.value.trim();
+
+      if (!inputValue) {
+        outputField.innerHTML = '재료를 입력해주세요.';
+        return;
+      }
+
+      console.log('입력된 문자:', inputValue);
+
+      // 출력 필드에 로딩 메시지 표시
+      outputField.innerHTML = '레시피를 생성 중입니다...';
+
+      // 임시 응답 예시
+      setTimeout(() => {
+        outputField.innerHTML = `${inputValue}로 만들 수 있는 예시 레시피입니다.<br>1. 재료 준비<br>2. 조리<br>3. 완성!`;
+        inputField.value = '';
+      }, 1000);
+    }
+
+    enterButton.addEventListener('click', processInput);
+
+    inputField.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        processInput();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
