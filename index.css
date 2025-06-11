@@ -19,13 +19,13 @@ body {
 
 .image-container {
   position: absolute;
-  top: 10%; /* 화면 상단에서 10% 아래로 배치 */
+  top: 15%; /* 화면 상단에서 15% 아래로 배치 */
   width: 100%; /* 부모 컨테이너 너비 */
   text-align: center; /* 가로 중심 정렬 */
 }
 
 .image-container img {
-  width: 120px; /* 가로 크기 고정 */
+  width: 70px; /* 가로 크기 고정 */
   height: auto; /* 세로 크기는 비율에 따라 자동 조정 */
   display: block;
   margin: 0 auto; /* 이미지 가로 중심 정렬 */
@@ -34,7 +34,7 @@ body {
 
 .caption {
   position: absolute;
-  top: calc(10% + 120px + 16%); /* 이미지 아래로 16% 간격 */
+  top: calc(15% + 70px + 14%); /* image-container 아래로 4% 간격 */
   width: 100%;
   font-size: 1.2rem;
   text-align: center;
@@ -48,11 +48,12 @@ body {
   border: 1px solid #ddd;
   font-size: 1rem;
   height: 23px; /* 원래 높이로 복원 */
+  background-color: #F4F4F4; /* 배경색 수정 */
 }
 
 .input-container {
   position: absolute;
-  bottom: 11%; /* copyright의 bottom(10%)보다 1% 위로 배치 */
+  bottom: 5%; /* 화면 하단에서 5% 위로 배치 */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -64,8 +65,8 @@ body {
 }
 
 .enter-button {
-  width: auto; /* 원본 가로 크기 유지 */
-  height: auto; /* 원본 세로 크기 유지 */
+  height: 43px; /* 높이를 50픽셀로 설정 */
+  width: 43px; /* 정사각형 비율 유지 */
   object-fit: contain; /* 원본 비율 유지 */
   cursor: pointer;
 }
@@ -78,16 +79,17 @@ body {
   min-height: 100px;
   margin: 0 auto;
   padding: 12px;
-  background: #fff;
+  background-color: transparent; /* 배경색 투명 */
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   font-size: 1rem;
   word-break: break-all;
+  line-height: 1.5; /* 줄 간격을 1.5배로 설정 */
 }
 
 .copyright {
   position: absolute;
-  bottom: 10%; /* 화면 하단에서 10% 위로 배치 */
+  bottom: 3%; /* 화면 하단에서 3% 위로 배치 */
   font-size: 0.85rem;
   color: #aaa;
   text-align: center;
