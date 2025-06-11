@@ -1,134 +1,45 @@
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background-color: #F4F4F4;
-  width: 100vw; /* 화면 너비 */
-  height: calc(100vw * 16 / 9); /* 9:16 비율로 높이 계산 */
-  overflow: hidden; /* 스크롤 방지 */
-}
+from flask import Flask, request, jsonify
+from openai import OpenAI
+import httpx # httpx 라이브러리 임포트
+from dotenv import load_dotenv
+import os
 
-.main-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 가로 중심 정렬 */
-}
+app = Flask(__name__)
 
-.image-container {
-  position: absolute;
-  top: 15%; /* 화면 상단에서 15% 아래로 배치 */
-  width: 100%; /* 부모 컨테이너 너비 */
-  text-align: center; /* 가로 중심 정렬 */
-}
+# 환경 변수 로드
+load_dotenv('api.env')  # api.env 파일에서 환경변수 로드
+api_key = os.getenv('OPENAI_API_KEY')
 
-.image-container img {
-  width: 70px; /* 가로 크기 고정 */
-  height: auto; /* 세로 크기는 비율에 따라 자동 조정 */
-  display: block;
-  margin: 0 auto; /* 이미지 가로 중심 정렬 */
-  border-radius: 16px;
-}
+# OpenAI API 클라이언트 설정
+client = OpenAI(
+    api_key=api_key,
+    http_client=httpx.Client()
+)
 
-.caption {
-  position: absolute;
-  top: calc(15% + 70px + 14%); /* image-container 아래로 4% 간격 */
-  width: 100%;
-  font-size: 1.2rem;
-  text-align: center;
-  margin: 0 auto;
-}
+@app.route('/api/generate_recipe', methods=['POST'])
+def generate_recipe():
+    data = request.get_json()
+    ingredients = data.get('ingredients')
 
-.input-field {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  height: 23px; /* 원래 높이로 복원 */
-  background-color: #F4F4F4; /* 배경색 수정 */
-}
+    if not ingredients:
+        return jsonify({'error': '재료를 입력해주세요.'}), 400
 
-.input-container {
-  position: absolute;
-  bottom: 5%; /* 화면 하단에서 5% 위로 배치 */
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 80%;
-  height: 54px;
-  background-color: transparent; /* 배경색 투명 */
-  border-radius: 8px;
-  padding: 8px;
-}
+    try:
+        # GPT API 호출
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"다음 재료들로 만들 수 있는 요리 레시피를 알려줘: {ingredients}",
+                }
+            ],
+            model="gpt-4o-mini",  # 모델을 gpt-4o-mini로 변경
+        )
+        gpt_response = chat_completion.choices[0].message.content
+        return jsonify({'recipe': gpt_response})
+    except Exception as e:
+        print(e) # 실제 예외 메시지를 서버 로그에 출력
+        return jsonify({'error': str(e)}), 500
 
-.enter-button {
-  height: 43px; /* 높이를 50픽셀로 설정 */
-  width: 43px; /* 정사각형 비율 유지 */
-  object-fit: contain; /* 원본 비율 유지 */
-  cursor: pointer;
-}
-
-.output-field {
-  position: absolute;
-  top: calc(10% + 120px + 2% + 1.2rem + 5%); /* 캡션 아래로 5% 간격 */
-  width: 80%;
-  height: 30vh; /* 브라우저 높이의 30% */
-  min-height: 100px;
-  margin: 0 auto;
-  padding: 12px;
-  background-color: transparent; /* 배경색 투명 */
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  font-size: 1rem;
-  word-break: break-all;
-  line-height: 1.5; /* 줄 간격을 1.5배로 설정 */
-}
-
-.copyright {
-  position: absolute;
-  bottom: 3%; /* 화면 하단에서 3% 위로 배치 */
-  font-size: 0.85rem;
-  color: #aaa;
-  text-align: center;
-  width: 100%;
-}
-
-.content-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* 세로 중심 정렬 */
-  gap: 20px;
-  width: 100%;
-  height: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-/* 전체 스크롤바 숨기기 (웹킷 브라우저) */
-body::-webkit-scrollbar {
-  display: none;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
-  overflow-x: hidden;
-  background: #fafafa;
-}
-
-@media (max-width: 600px) {
-  .content-wrapper {
-    padding: 8px;
-    max-width: 100vw;
-  }
-  .output-field, .input-container {
-    font-size: 0.95rem;
-  }
-}
+if __name__ == '__main__':
+    app.run(debug=True)
