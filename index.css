@@ -1,0 +1,83 @@
+body {
+  display: flex;
+  flex-direction: column; /* 요소를 세로로 정렬 */
+  justify-content: center; /* 요소들을 세로로 중앙 정렬 */
+  align-items: center;
+  height: 932px; /* 세로 높이를 932px로 고정 */
+  width: 430px; /* 너비를 430px로 설정 */
+  margin: 0;
+  background-color: #F4F4F4; /* 전체적인 배경색을 F4F4F4로 변경 */
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 세로 열에서 항목을 가로로 중앙 정렬 */
+  justify-content: center; /* 세로 열에서 항목을 세로로 중앙 정렬 */
+  gap: 10px; /* 이미지와 캡션 사이의 간격 설정 */
+}
+.image-container {
+  /* main-content가 레이아웃을 처리하므로 위치 속성 제거 */
+  text-align: center; /* 이전 브라우저 및 인라인 요소 중앙 정렬을 위한 대체 */
+}
+.image-container img {
+  /* 절대 위치 및 여백 제거 */
+  display: block;
+  width: 67px; /* 정확한 너비 설정 */
+  height: 92px; /* 정확한 높이 설정 */
+  max-width: 100%; /* 이미지가 반응형임을 보장 */
+}
+.caption {
+  font-size: 24px;
+  text-align: center;
+}
+.input-field {
+  width: 347px; /* 347px - EnterButton.png 너비를 고려하여 조정 */
+  height: 54px;
+  background-color: transparent; /* 배경색을 투명하게 변경 */
+  border: 1px solid #ccc; /* 회색 테두리 추가 */
+  border-radius: 5px; /* 코너를 5px만큼 굴림 */
+  padding: 10px;
+  box-sizing: border-box; /* 패딩이 너비/높이에 포함되도록 */
+}
+.input-container {
+  position: relative; /* 절대 위치를 위한 기준점 */
+  width: 347px; /* 입력 필드와 동일한 너비 */
+  height: 54px; /* 입력 필드와 동일한 높이 */
+  display: flex;
+  align-items: center;
+  background-color: #F2F2F2; /* 입력 필드와 동일한 배경색 */
+}
+.enter-button {
+  position: absolute;
+  right: 5px; /* 오른쪽에서 5px 간격 */
+  width: 24px; /* 버튼 이미지의 너비 (예시) */
+  height: 24px; /* 버튼 이미지의 높이 (예시) */
+  cursor: pointer; /* 클릭 가능한 요소임을 나타냄 */
+}
+.output-field {
+  width: 348px;
+  height: 388px;
+  background-color: transparent; /* 투명하게 */
+  border: none; /* 임시 테두리 제거 */
+  box-sizing: border-box; /* 패딩이 너비/높이에 포함되도록 */
+  font-size: 16px; /* 폰트 크기 16px로 설정 */
+  color: #2F2F2F; /* 색상 2F2F2F로 설정 */
+  padding: 10px; /* 텍스트가 가장자리에 너무 붙지 않도록 패딩 추가 */
+}
+.copyright {
+  font-size: 14px;
+  color: #9B9B9B;
+  text-align: center;
+  width: 100%; /* 중앙 정렬을 위해 전체 너비를 차지하도록 보장 */
+  padding-bottom: 1px; /* 하단에서 5px 간격으로 패딩 조정 */
+}
+.content-wrapper {
+  position: relative; /* transform 속성을 사용하기 위해 필요 */
+  display: flex; /* 내부 요소들을 세로로 정렬 */
+  flex-direction: column; /* 내부 요소들을 세로로 정렬 */
+  align-items: center; /* 내부 요소들을 가로 중앙 정렬 */
+  justify-content: center; /* 내부 요소들을 세로 중앙 정렬 */
+  gap: 20px; /* 요소들 간의 간격 설정 */
+  height: 100%; /* 부모(body)의 높이를 기준으로 설정 */
+  width: 100%; /* 부모(body)의 너비를 기준으로 설정 */
+}
