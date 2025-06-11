@@ -19,8 +19,8 @@ body {
   text-align: center; /* 이전 브라우저 및 인라인 요소 중앙 정렬을 위한 대체 */
 }
 .image-container img {
-  max-width: 100%;
-  height: auto;
+  width: 347px;
+  height: 347px;
   display: block;
   border-radius: 16px;
 }
@@ -111,3 +111,4 @@ body {
     font-size: 0.95rem;
   }
 }
+
