@@ -53,7 +53,7 @@ body {
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 1rem;
-  height: 23px; /* 원래 높이로 복원 */
+  height: 41px; /* 원래 높이로 복원 */
   background-color: #F4F4F4; /* 배경색 수정 */
 }
 
@@ -64,7 +64,7 @@ body {
   align-items: center;
   gap: 8px;
   width: 80%;
-  height: 54px;
+  height: 55px;
   background-color: transparent; /* 배경색 투명 */
   border-radius: 8px;
   padding: 8px;
